@@ -11,6 +11,7 @@ class Solution(object):
         :rtype: Optional[ListNode]
         """
         dummy = ListNode()
+
         cur = dummy
 
         while list1 and list2:
@@ -25,6 +26,5 @@ class Solution(object):
             cur.next = list1
         else:
             cur.next = list2
-            
         return dummy.next
         
