@@ -1,34 +1,27 @@
-class Solution(object):
-    def canFinish(self, numCourses, prerequisites):
-        """
-        :type numCourses: int
-        :type prerequisites: List[List[int]]
-        :rtype: bool
-        """
-        
-        preMap = {i:[] for i in range(numCourses)}
+class Solution:
+    def canFinish(self, numCourses: int, prerequisites: list[list[int]]) -> bool:
+        adj = [[] for _ in range(numCourses)]
+        indegree = [0] * numCourses
+        ans = []
 
-        for crs,pre in prerequisites:
-            preMap[crs].append(pre)
+        for pair in prerequisites:
+            course = pair[0]
+            prereq = pair[1]
+            adj[prereq].append(course)
+            indegree[course] += 1
         
-        visiting = set()
+        queue = deque()
+        for i in range(numCourses):
+            if indegree[i] == 0:
+                queue.append(i)
+        
+        while queue:
+            current = queue.popleft()
+            ans.append(current)
 
-        def dfs(crs):
-            if crs in visiting:
-                return False
-            if preMap[crs] == []:
-                return True
-            
-            visiting.add(crs)
-            for pre in preMap[crs]:
-                if not dfs(pre):
-                    return False
-            visiting.remove(crs)
-            preMap[crs] = []
-            return True
+            for next_course in adj[current]:
+                indegree[next_course] -= 1
+                if indegree[next_course] == 0:
+                    queue.append(next_course)
         
-        for n in range(numCourses):
-            if not dfs(n):
-                return False
-        
-        return True
+        return len(ans) == numCourses
