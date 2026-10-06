@@ -1,6 +1,11 @@
-class Solution:
-    def isValid(self, s: str) -> bool:
+class Solution(object):
+    def isValid(self, s):
+        """
+        :type s: str
+        :rtype: bool
+        """
         stack = []
+        n = len(s)
 
         for i in range(len(s)):
             if s[i] == '(' or s[i] == '{' or s[i] == '[':
@@ -9,12 +14,11 @@ class Solution:
                 if not stack:
                     return False
                 top = stack.pop()
-                if s[i]==')'and top!='(':
+                if s[i] == ')' and top != '(':
                     return False
-                if s[i]==']'and top!='[':
+                if s[i] == '}' and top!= '{':
                     return False
-                if s[i]=='}'and top!='{':
+                if s[i] == ']' and top != '[':
                     return False
-        return len(stack) == 0
-            
         
+        return len(stack) == 0
