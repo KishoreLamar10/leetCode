@@ -4,15 +4,19 @@ class Solution(object):
         :type s: str
         :type t: str
         :rtype: bool
-        """
+        """       
         if len(s) != len(t):
             return False
         
         seen = {}
-        for char in s:
-            seen[char] = seen.get(char,0) + 1
-        for char in t:
-            if char not in seen or seen[char] == 0:
+
+        for c in s:
+            seen[c] = seen.get(c,0) + 1
+        for c in t:
+            if c not in seen or seen[c] == 0:
                 return False
-            seen[char] -= 1
+            seen[c] -= 1
         return True
+
+
+        
