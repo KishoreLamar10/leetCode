@@ -1,16 +1,11 @@
-class Solution(object):
-    def search(self, nums, target):
-        """
-        :type nums: List[int]
-        :type target: int
-        :rtype: int
-        """
-        l, r = 0, len(nums) - 1
+class Solution:
+    def search(self, nums: list[int], target: int) -> int:
+        l, r = 0 , len(nums) - 1
         while l <= r:
-            mid = (l + r) // 2
-            if target == nums[mid]:
+            mid = (l+r) // 2
+            if target == nums[mid] :
                 return mid
-            elif target > nums[mid]:
+            elif nums[mid] < target:
                 l = mid + 1
             else:
                 r = mid - 1
